@@ -11,7 +11,15 @@ let nbc c =
   else if Char.code c < 0b11111110 then 6
   else -1
 
-let decode fns fnc unsupported s i len =
+let decode
+    (fns : int -> string -> int -> int -> 'a)
+    (fnc : int -> char -> 'a)
+    (unsupported : int -> string -> int -> int -> 'a)
+    (s : string)
+    (i : int)
+    (len : int)
+  : 'a
+  =
   let c = String.unsafe_get s i in
   let nbc = nbc c in
   if nbc < 0 || i + nbc > len
@@ -270,7 +278,6 @@ let decode fns fnc unsupported s i len =
         | 0xA8 -> fns (i + nbc) "CH" 0 2
         | 0xA9 -> fns (i + nbc) "CHT" 0 2
         | 0xAB -> fnc (i + nbc) 'Y'
-        | 0xAC -> ()
         | 0xAD -> fnc (i + nbc) 'E'
         | 0xAE -> fns (i + nbc) "YOU" 0 3
         | 0xAF -> fns (i + nbc) "YA" 0 2
@@ -305,7 +312,6 @@ let decode fns fnc unsupported s i len =
         | 0x88 -> fns (i + nbc) "ch" 0 2
         | 0x89 -> fns (i + nbc) "cht" 0 3
         | 0x8B -> fnc (i + nbc) 'y'
-        | 0x8C -> ()
         | 0x8D -> fnc (i + nbc) 'e'
         | 0x8E -> fns (i + nbc) "you" 0 3
         | 0x8F -> fns (i + nbc) "ya" 0 2
