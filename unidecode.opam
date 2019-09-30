@@ -19,10 +19,8 @@ bug-reports: "https://github.com/geneweb/unidecode/issues"
 dev-repo: "git+https://github.com/geneweb/unidecode.git"
 
 depends: [
-  "dune" { build >= "1.1.1" }
+  "dune" { build >= "1.10" }
   "ocaml" { >= "4.05" }
   ]
 
-build: [ [ "dune" "build"] ]
-
-install: [ "dune" "install" ]
+build: [ [ "dune" "build" "-p" name "-j" jobs] ]
