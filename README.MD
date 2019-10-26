@@ -26,4 +26,6 @@ Released under the terms of the [GNU GENERAL PUBLIC LICENSE](LICENSE).
 dune build            # build the library
 dune install          # install the built library
 dune clean            # clean compilation artifacts
+dune runtest          # run unit tests
+dune build @runbench  # compare with other libs
 ```
