@@ -1,0 +1,12 @@
+(library
+ (name test_data)
+ (modules test_data)
+)
+
+(executable
+  (name test)
+  (libraries test_data ounit2 unidecode)
+  (modules test)
+)
+
+(alias (name runtest) (action (run %{exe:test.exe}) ) )
