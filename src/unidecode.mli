@@ -33,4 +33,4 @@ val decode
 
     If [str] already is an ASCII string, [str] itself is returned.
 *)
-val decode_string : ?unsupported:char -> string -> string
+val decode_string : ?unsupported:(Bytes.t -> int -> int -> int ref -> unit) -> string -> string
