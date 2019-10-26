@@ -1,3 +1,7 @@
+(** Note: in this module, decoding a character means translating an
+    UTF8 character to an ASCII representation
+*)
+
 (** For a given byte, returns how many bytes compose the UTF8 character. *)
 val nbc : char -> int
 
@@ -22,3 +26,11 @@ val decode
   -> (int -> char -> 'a)
   -> (int -> 'a)
   -> string -> int -> int -> 'a
+
+(** [decode_string str]
+    Return a version of [str] where all characters has been decoded
+    using [decode].
+
+    If [str] already is an ASCII string, [str] itself is returned.
+*)
+val decode_string : ?unsupported:char -> string -> string

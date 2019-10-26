@@ -419,3 +419,30 @@ let decode
       end
 
     | _ -> unsupported (i + nbc)
+
+let string_forall fn s =
+  let len = String.length s - 1 in
+  let rec loop i =
+    if i = len then true
+    else fn (String.unsafe_get s i) && loop (i + 1)
+  in loop 0
+
+let decode_string ?(unsupported = '?') s =
+  if string_forall (fun c -> Char.code c < 128) s then s
+  else
+    (* decode returns at max a string of 3 characters instead of 2
+       (e.g. "\0xd0\0xa7" -> "TCH" *)
+    let b = Bytes.create (String.length s * 2) in
+    let o = ref 0 in
+    let len = String.length s in
+    let rec loop i =
+      if i >= len then Bytes.sub_string b 0 !o
+      else
+        loop @@
+        decode
+          (fun n s -> (Bytes.blit_string s 0 b !o (String.length s) ; o := !o + String.length s ; n))
+          (fun n c -> Bytes.unsafe_set b !o c ; incr o ; n)
+          (fun n -> Bytes.unsafe_set b !o unsupported ; incr o ; n)
+          s i len
+    in
+    loop 0
