@@ -274,9 +274,9 @@ let decode
         | 0xA4 -> fnc (i + nbc) 'F'
         | 0xA5 -> fns (i + nbc) "KH" 0 2
         | 0xA6 -> fns (i + nbc) "TS" 0 2
-        | 0xA7 -> fns (i + nbc) "TCH" 0 2
+        | 0xA7 -> fns (i + nbc) "TCH" 0 3
         | 0xA8 -> fns (i + nbc) "CH" 0 2
-        | 0xA9 -> fns (i + nbc) "CHT" 0 2
+        | 0xA9 -> fns (i + nbc) "CHT" 0 3
         | 0xAB -> fnc (i + nbc) 'Y'
         | 0xAD -> fnc (i + nbc) 'E'
         | 0xAE -> fns (i + nbc) "YOU" 0 3
