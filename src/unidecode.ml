@@ -336,10 +336,17 @@ let decode
         | 0x88 -> fns n "ch"
         | 0x89 -> fns n "cht"
         | 0x8B -> fnc n 'y'
+        | 0x8C -> fnc n '\''
         | 0x8D -> fnc n 'e'
-        | 0x8E -> fns n "you"
+        | 0x8E -> fns n "yu"
         | 0x8F -> fns n "ya"
         | 0x91 -> fnc n 'e'
+        | _ -> unsupported n
+      end
+
+    | 0xD2 ->
+      begin match Char.code @@ String.unsafe_get s (i+1) with
+        | 0xAf -> fnc n 'u'
         | _ -> unsupported n
       end
 
