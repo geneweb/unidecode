@@ -2,13 +2,13 @@
 (* Copyright (c) 2018-2019 Geneanet *)
 
 let nbc c =
-  if Char.code c < 0b10000000 then 1
-  else if Char.code c < 0b11000000 then -1
-  else if Char.code c < 0b11100000 then 2
-  else if Char.code c < 0b11110000 then 3
-  else if Char.code c < 0b11111000 then 4
-  else if Char.code c < 0b11111100 then 5
-  else if Char.code c < 0b11111110 then 6
+  if Char.code c < 0x80 then 1
+  else if Char.code c < 0xC0 then -1
+  else if Char.code c < 0xE0 then 2
+  else if Char.code c < 0xF0 then 3
+  else if Char.code c < 0xF8 then 4
+  else if Char.code c < 0xFC then 5
+  else if Char.code c < 0xFE then 6
   else -1
 
 let decode
