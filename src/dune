@@ -2,4 +2,12 @@
   (public_name unidecode)
   (wrapped true)
   (synopsis "Convert unicode strings into its ASCII representation")
+  (modules unidecode)
+)
+
+(executable
+  (name cli)
+  (public_name unidecode)
+  (libraries unidecode)
+  (modules cli)
 )
