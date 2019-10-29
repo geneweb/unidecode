@@ -189,6 +189,12 @@ let decode
         | _ -> unsupported n
       end
 
+    (* diacritics marks *)
+    | 0xCC -> fns n ""
+
+    (* diacritics marks *)
+    | 0xCD when Char.code @@ String.unsafe_get s (i+1) <= 0xAF -> fns n ""
+
     | 0xCE ->
       (* Greek *)
       begin match Char.code @@ String.unsafe_get s (i+1) with
