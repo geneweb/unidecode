@@ -178,7 +178,7 @@ let decode
         | 0x8E -> fnc (i + nbc) 'Y'
         | 0x8F -> fnc (i + nbc) 'y'
         | 0x94 -> fnc (i + nbc) 'o'
-        | 0xA8 | 0xAE -> fnc (i + nbc) 'i'
+        | 0xA8 | 0xA9 | 0xAE -> fnc (i + nbc) 'i'
         | _ -> unsupported (i + nbc)
       end
 
@@ -435,10 +435,24 @@ let decode
         | _ -> unsupported (i + nbc)
       end
 
-      | 0xE1 ->
+    | 0xE1 ->
         (* Vietnameese *)
         begin match Char.code @@ String.unsafe_get s (i + 1) with
-            0xB8 ->
+          | 0xB5 -> begin match Char.code @@ String.unsafe_get s (i + 2) with
+              | 0xAB -> fns (i + nbc) "ue"
+              | 0xBC -> fnc (i + nbc) 'i'
+              | 0xBF -> fnc (i + nbc) 'u'
+              | _ -> unsupported (i + nbc)
+            end
+          | 0xB6 -> begin match Char.code @@ String.unsafe_get s (i + 2) with
+              | 0x8F | 0x90 -> fnc (i + nbc) 'a'
+              | 0x92 -> fnc (i + nbc) 'e'
+              | 0x96 -> fnc (i + nbc) 'i'
+              | 0x97 -> fnc (i + nbc) 'o'
+              | 0x99 -> fnc (i + nbc) 'u'
+              | _ -> unsupported (i + nbc)
+            end
+          | 0xB8 ->
             begin match Char.code @@ String.unsafe_get s (i + 2) with
               | 0x80 -> fnc (i + nbc) 'A'
               | 0x81 -> fnc (i + nbc) 'a'
@@ -690,7 +704,7 @@ let decode
               | 0xAB -> fnc (i + nbc) 'u'
               | 0xAC -> fnc (i + nbc) 'U'
               | 0xAD -> fnc (i + nbc) 'u'
-              | 0xAE -> fnc (i + nbc) 'u'
+              | 0xAE -> fnc (i + nbc) 'U'
               | 0xAF -> fnc (i + nbc) 'u'
               | 0xB0 -> fnc (i + nbc) 'U'
               | 0xB1 -> fnc (i + nbc) 'u'
@@ -702,6 +716,8 @@ let decode
               | 0xB7 -> fnc (i + nbc) 'y'
               | 0xB8 -> fnc (i + nbc) 'Y'
               | 0xB9 -> fnc (i + nbc) 'y'
+              | 0xBE -> fnc (i + nbc) 'Y'
+              | 0xBF -> fnc (i + nbc) 'y'
               | _ -> unsupported (i + nbc)
             end
           | _ -> unsupported (i + nbc)
@@ -712,6 +728,53 @@ let decode
          | 0x80 ->
            begin match Char.code @@ String.unsafe_get s (i + 2) with
              | 0x99 -> fnc (i + nbc) '\''
+             | _ -> unsupported (i + nbc)
+            end
+         | 0x84 ->
+           begin match Char.code @@ String.unsafe_get s (i + 2) with
+             | 0xB4 -> fnc (i + nbc) 'o'
+             | _ -> unsupported (i + nbc)
+            end
+         | 0xB1 ->
+           begin match Char.code @@ String.unsafe_get s (i + 2) with
+             | 0xA5 -> fnc (i + nbc) 'a'
+             | 0xAD -> fnc (i + nbc) 'A'
+             | 0xBA -> fnc (i + nbc) 'o'
+             | 0xB8 -> fnc (i + nbc) 'e'
+             | _ -> unsupported (i + nbc)
+           end
+         | _ -> unsupported (i + nbc)
+       end
+
+     | 0xEA ->
+       begin match Char.code @@ String.unsafe_get s (i + 1) with
+         | 0x9D ->
+           begin match Char.code @@ String.unsafe_get s (i + 2) with
+             | 0x8A | 0x8C -> fnc (i + nbc) 'O'
+             | 0x8B | 0x8D -> fnc (i + nbc) 'o'
+             | 0x8F -> fns (i + nbc) "oo"
+             | 0x8E -> fns (i + nbc) "OO"
+             | 0xB8 -> fns (i + nbc) "um"
+             | _ -> unsupported (i + nbc)
+            end
+         | 0x9E ->
+           begin match Char.code @@ String.unsafe_get s (i + 2) with
+             | 0xB6 -> fnc (i + nbc) 'O'
+             | 0xB7 -> fnc (i + nbc) 'o'
+             | _ -> unsupported (i + nbc)
+            end
+         | 0xAC ->
+           begin match Char.code @@ String.unsafe_get s (i + 2) with
+             | 0xBF -> fnc (i + nbc) 'o'
+             | _ -> unsupported (i + nbc)
+            end
+         | 0xAD ->
+           begin match Char.code @@ String.unsafe_get s (i + 2) with
+             | 0x80 | 0xA2 -> fns (i + nbc) "oe"
+             | 0x8E | 0x8F | 0x92 -> fnc (i + nbc) 'u'
+             | 0x90 -> fns (i + nbc) "ui"
+             | 0x9A -> fnc (i + nbc) 'y'
+             | 0xA3 -> fns (i + nbc) "uo"
              | _ -> unsupported (i + nbc)
             end
          | _ -> unsupported (i + nbc)
