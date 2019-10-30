@@ -20,6 +20,17 @@ opam install unidecode
 
 Released under the terms of the [GNU GENERAL PUBLIC LICENSE](LICENSE).
 
+## Limitations
+
+- Only supports NFC normalization form.
+- Transliteration targets french language
+  (i.e. russian `у` gives `ou` while `u` could be expected).
+  This will eventually be parameterizable.
+- Transliteration might produce strange casing
+  (e.g. `У` produce `OU` while `Ou` could be expected).
+  Choosing between default (current) behavior, lower casing, upper
+  casing, and capitalization will eventually be an option.
+
 ## Instructions for developpers
 
 ```bash
