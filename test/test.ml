@@ -16,5 +16,9 @@ let _ =
         test_decode_string vietnamese_expected vietnamese_input
       end
 
+    ; "decode_string russian" >:: begin fun _ ->
+        test_decode_string russian_expected russian_input
+      end
+
     ]
   end
