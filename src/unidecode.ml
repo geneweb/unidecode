@@ -741,6 +741,8 @@ let decode
        begin match Char.code @@ String.unsafe_get s (i + 1) with
          | 0x80 ->
            begin match Char.code @@ String.unsafe_get s (i + 2) with
+             | 0x90 | 0x91 | 0x92 | 0x93 -> fnc n '-'
+             | 0x94 | 0x95 -> fns n "--"
              | 0x99 -> fnc n '\''
              | _ -> unsupported n
             end
