@@ -3,13 +3,13 @@
 
 let nbc c =
   if Char.code c < 0x80 then 1
-  else if Char.code c < 0xC0 then -1
+  else if Char.code c < 0xC0 then invalid_arg "nbc"
   else if Char.code c < 0xE0 then 2
   else if Char.code c < 0xF0 then 3
   else if Char.code c < 0xF8 then 4
   else if Char.code c < 0xFC then 5
   else if Char.code c < 0xFE then 6
-  else -1
+  else invalid_arg "nbc"
 
 let decode
     (fns : int -> string -> 'a)
