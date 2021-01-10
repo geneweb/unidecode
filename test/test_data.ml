@@ -46,4 +46,4 @@ let russian_expected =
    Norvegi, Finland, Estoni, Latvi, Litva, Pol'cho, Belarous', OUkraina, \
    Gurji, Azerbaidjan, Kazakhstan, KHitad, Mongol, KHoito Solongos geһen \
    arban durben gurenuudte khile zourydag, mun ouһaar ANOU-ai Alyaska \
-   mojotoi bolon YApon oulastai khile negetei. "
+   mojotoi bolon YApon oulastai khile negetei."
