@@ -21,7 +21,7 @@ let decode
   : 'a
   =
   let c = String.unsafe_get s i in
-  let nbc = nbc c in
+  let nbc = try nbc c with Invalid_argument _ -> -1 in
   let n = i + nbc in
   if nbc < 0 || n > len
   then fnc (i + 1) c
